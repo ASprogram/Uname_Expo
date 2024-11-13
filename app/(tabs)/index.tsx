@@ -15,9 +15,16 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="title">近くにいる人</ThemedText>
+        {/* <HelloWave /> */}
+        <ThemedText>
+          えふじ{'\n'}
+          Tomoki Konishi[🐥]{'\n'}
+          たかはし{'\n'}
+          mirano yamakawa{'\n'}
+          河名 翼{'\n'}
+        </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
