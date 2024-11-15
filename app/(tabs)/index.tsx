@@ -1,77 +1,89 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function UserScreen() {
+  const nearbyPeople = [
+    { emoji: '🌉', name: 'たかはし' },
+    { emoji: '🦵', name: 'あしざわ' },
+    { emoji: '🍅', name: 'かわかみ' },
+    { emoji: '✌️', name: 'やべ' },
+    { emoji: '🍑', name: 'たべ' },
+    { emoji: '🌳', name: 'もり' },
+    { emoji: '💪', name: 'いせ' },
+  ];
 
-export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="title">近くにいる人</ThemedText>
-        {/* <HelloWave /> */}
-        <ThemedText>
-          えふじ{'\n'}
-          Tomoki Konishi[🐥]{'\n'}
-          たかはし{'\n'}
-          mirano yamakawa{'\n'}
-          河名 翼{'\n'}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <ScrollView contentContainerStyle={styles.container}>
+      {/* 大見出し */}
+      <Text style={styles.title}>U name</Text>
+
+      {/* 説明テキスト */}
+      <Text style={styles.subtitle}>
+        目の前のアノヒトの名前を{'\n'}こっそり確認できます
+      </Text>
+
+      {/* セクションタイトル */}
+      <Text style={styles.sectionTitle}>近くにいる人の名前</Text>
+
+      {/* 名前リスト */}
+      <View style={styles.peopleList}>
+        {nearbyPeople.map((person, index) => (
+          <View key={index} style={styles.personItem}>
+            <Text style={styles.personEmoji}>{person.emoji}</Text>
+            <Text style={styles.personName}>{person.name}</Text>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flexGrow: 1,
+    alignItems: 'center',
+    paddingVertical: 32,
+    backgroundColor: '#FFFFFF',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#333333',
+    marginBottom: 8,
+    marginTop: 40
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666666',
+    textAlign: 'center',
+    marginBottom: 40, // 説明テキストの下に空白を追加
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333333',
+    marginBottom: 16,
+  },
+  peopleList: {
+    width: '80%',
+    alignItems: 'center',
+  },
+  personItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    backgroundColor: '#E0E0E0',
+    borderRadius: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginBottom: 12,
+    width: '100%',
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  personEmoji: {
+    fontSize: 24,
+    marginRight: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  personName: {
+    fontSize: 18,
+    color: '#333333',
   },
 });
